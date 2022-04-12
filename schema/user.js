@@ -18,6 +18,7 @@ const password = joi
   .required()
 // 定义 id, nickname 的验证规则
 const id = joi.number().integer().min(1).required()
+const roleID = joi.number().integer().min(1).required()
 const nickname = joi.string().required()
 // dataUri() 指的是如下格式的字符串数据：
 // data:image/png;base64,VE9PTUFOWVNFQ1JFVFM=
@@ -37,6 +38,19 @@ exports.update_userinfo_schema = {
   body: {
     id,
     nickname
+  },
+}
+// 验证规则对象 - 修改用户权限角色基本信息
+exports.get_user_role_schema = {
+  body: {
+    id
+  },
+}
+// 验证规则对象 - 修改用户权限角色基本信息
+exports.update_user_role_schema = {
+  body: {
+    id,
+    roleID
   },
 }
 
@@ -60,3 +74,4 @@ exports.update_avatar_schema = {
     avatar,
   },
 }
+

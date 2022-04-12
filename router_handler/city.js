@@ -4,7 +4,7 @@ const db = require('../db/index')
 // 获取城市数据
 exports.getCityInfo = (req, res) => {
     // is_delete 为 0 表示没有被 标记为删除 的数据
-    const sql = 'select * from ev_city where is_delete=0 order by id asc'
+    const sql = 'select * from ev_city'
     db.query(sql, (err, results) => {
         // 1. 执行 SQL 语句失败
         if (err) return res.cc(err)

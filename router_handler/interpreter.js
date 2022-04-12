@@ -44,7 +44,6 @@ exports.updateInterpreterById = (req, res) => {
         if (err) return res.cc(err)
         // 执行 SQL 语句成功，但影响行数不为 1
         if (results.affectedRows !== 1) return res.cc('修改讲解器信息失败！')
-        console.log(req.body)
         // 修改讲解器信息成功
         return res.cc('修改讲解器信息成功！', 0)
       })

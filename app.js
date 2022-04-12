@@ -41,15 +41,18 @@ app.use('/api', userRouter)
 const userinfoRouter = require('./router/userinfo')
 // 注意：以 /my 开头的接口，都是有权限的接口，需要进行 Token 身份认证
 app.use('/my', userinfoRouter)
+// 导入并使用 用户权限 路由模块
+const rolesRouter = require('./router/roles')
+app.use('/roles', rolesRouter)
 // 导入并使用 城市 路由模块
 const cityinfoRouter = require('./router/city')
-app.use('/my/city', cityinfoRouter)
+app.use('/city', cityinfoRouter)
 // 导入并使用 景点 路由模块
 const viewinfoRouter = require('./router/views')
-app.use('/my/views', viewinfoRouter)
+app.use('/views', viewinfoRouter)
 // 导入并使用 讲解器 路由模块
 const interpreterRouter = require('./router/interpreter')
-app.use('/my/interpreter', interpreterRouter)
+app.use('/interpreter', interpreterRouter)
 // 导入并使用 用户购买、录制讲解器 路由模块
 const operateRouter = require('./router/operate')
 app.use('/my/operate', operateRouter)

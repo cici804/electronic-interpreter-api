@@ -42,4 +42,13 @@ exports.delete_interpreter_schema = {
       is_delete,
     },
 }
+// 校验规则对象 - 购买讲解器
+const interpreter_id = joi.number().integer().min(1).required()
+
+exports.buy_interpreter_schema = {
+  body: {
+    // buy,
+    interpreter_id
+  },
+}
 
