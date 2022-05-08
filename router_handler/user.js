@@ -53,7 +53,7 @@ exports.login = (req, res) => {
     db.query(sql, userinfo.username, (err, results) => {
         if(err) return res.cc(err)
         // 没有查到username, results.length!=1
-        if (results.length !== 1) return res.cc('登录失败！')
+        if (results.length !== 1) return res.cc('用户不存在，请注册！')
         // 拿着用户输入的密码,和数据库中存储的密码进行对比
         const compareResult = bcrypt.compareSync(userinfo.password, results[0].password)
 

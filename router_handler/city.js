@@ -17,6 +17,22 @@ exports.getCityInfo = (req, res) => {
         })
       })
 }
+// 获取城市数据
+exports.getCityInfoById = (req, res) => {
+    // is_delete 为 0 表示没有被 标记为删除 的数据
+    const sql = 'select * from ev_city where id = ?'
+    db.query(sql, req.body.cityId, (err, results) => {
+        // 1. 执行 SQL 语句失败
+        if (err) return res.cc(err)
+      
+        // 2. 执行 SQL 语句成功
+        res.send({
+          status: 0,
+          message: '获取城市列表成功！',
+          data: results,
+        })
+      })
+}
 
 // 增加城市
 exports.addCity = (req, res) => {

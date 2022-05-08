@@ -10,7 +10,9 @@ const expressJoi = require('@escook/express-joi')
 const { add_interpreter_schema, update_interpreter_schema, delete_interpreter_schema  } = require('../schema/interpreter')
 
 // 获取 讲解器 的基本信息
-router.get('/info', interpreter_handler.getInfoByViewId)
+router.get('/info/', interpreter_handler.getInfo)
+// 根据景点ID, 获取 讲解器 的基本信息
+router.post('/infoByViewId', interpreter_handler.getInfoByViewId)
 // 新增 讲解器 的基本信息
 router.post('/add', expressJoi(add_interpreter_schema), interpreter_handler.addInterpreter)
 // 修改 讲解器 的基本信息

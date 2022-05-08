@@ -11,6 +11,9 @@ const { add_city_schema, delete_city_schema  } = require('../schema/city')
 
 // 获取 城市 的基本信息
 router.get('/cityInfo', city_handler.getCityInfo)
+
+// 根据城市id 获取 城市 的基本信息
+router.get('/cityInfoById', city_handler.getCityInfoById)
 // 新增 城市 的基本信息
 router.post('/add', expressJoi(add_city_schema), city_handler.addCity)
 // 删除 城市 的基本信息

@@ -1,22 +1,49 @@
 // 导入数据库操作模块
 const db = require('../db/index')
 
-// 根据 城市id 获取景点数据
+// 获取景点数据
 exports.getViewInfo = (req, res) => {
-    // 根据城市的 id，查询城市的所有景点数据
-    const sql = `select * from ev_views where cityid=?`
-    db.query(sql, req.body.cityid, (err, results) => {
+    const sql = `select * from ev_views where is_delete = 0`
+    db.query(sql, (err, results) => {
         // 1. 执行 SQL 语句失败
         if (err) return res.cc(err)
-    
-        // 2. 执行 SQL 语句成功，但是查询到的数据条数不等于 1
-        if (results.length !== 1) return res.cc('获取景点信息失败！')
     
         // 3. 将景点信息响应给客户端
         res.send({
             status: 0,
             message: '获取景点信息成功！',
-            data: results[0],
+            data: results,
+        })
+    })
+}
+// 获取删除了的景点数据
+exports.getViewDeleted = (req, res) => {
+    const sql = `select * from ev_views where is_delete = 1`
+    db.query(sql, (err, results) => {
+        // 1. 执行 SQL 语句失败
+        if (err) return res.cc(err)
+    
+        // 3. 将景点信息响应给客户端
+        res.send({
+            status: 0,
+            message: '获取已删除的景点信息成功！',
+            data: results,
+        })
+    })
+}
+
+// 根据 城市id 获取景点数据
+exports.getViewInfoByCityId = (req, res) => {
+    // 根据城市的 id，查询城市的所有景点数据
+    const sql = `select * from ev_views where cityid = ? and is_delete = 0`
+    db.query(sql, req.body.cityid, (err, results) => {
+        // 1. 执行 SQL 语句失败
+        if (err) return res.cc(err)
+        // 3. 将景点信息响应给客户端
+        res.send({
+            status: 0,
+            message: '获取景点信息成功！',
+            data: results,
         })
     })
 }
@@ -55,8 +82,7 @@ exports.updateViewById = (req, res) => {
         if (err) return res.cc(err)
       
         // 执行 SQL 语句成功，但影响行数不为 1
-        if (results.affectedRows !== 1) return res.cc('修改景点信息失败！')
-        console.log(req.body)
+        if (results.affectedRows !== 1) return res.cc(results)
         // 修改景点信息成功
         return res.cc('修改景点信息成功！', 0)
       })
